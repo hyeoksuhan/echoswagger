@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/hyeoksuhan/echoswagger"
 	"github.com/labstack/echo"
+	"github.com/pangpanglabs/echoswagger"
 )
 
 type UserController struct{}

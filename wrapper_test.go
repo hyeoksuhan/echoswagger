@@ -51,7 +51,7 @@ func TestNew(t *testing.T) {
 			info: &Info{
 				Title: "Test project",
 				Contact: &Contact{
-					URL: "https://github.com/hyeoksuhan/echoswagger",
+					URL: "https://github.com/pangpanglabs/echoswagger",
 				},
 			},
 			expectPaths: []string{"/doc", "/doc/swagger.json"},

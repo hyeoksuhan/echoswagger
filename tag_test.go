@@ -112,7 +112,6 @@ func TestXMLTags(t *testing.T) {
 		Comment string `xml:",comment"`
 		Address string `xml:"AddressDetail"`
 		Enable  bool   `xml:"-"`
-		Ignored bool
 	}
 
 	type User struct {
@@ -137,16 +136,14 @@ func TestXMLTags(t *testing.T) {
 	assert.Equal(t, pu["Spots"].XML.Wrapped, true)
 
 	ss := (*sapi.defs)["Spot"].Schema
-	assert.NotNil(t, ss)
 	ps := ss.Properties
+	assert.NotNil(t, ss)
 	assert.NotNil(t, ps)
 	assert.Equal(t, ss.XML.Name, "Spot")
-
-	assert.Nil(t, ps["Id"].XML)
+	assert.Equal(t, ps["Id"].XML.Attribute, "Id")
 	assert.Nil(t, ps["Comment"].XML)
 	assert.Equal(t, ps["Address"].XML.Name, "AddressDetail")
 	assert.Nil(t, ps["Enable"].XML)
-	assert.Nil(t, ps["Ignored"].XML)
 }
 
 func TestEnumInSchema(t *testing.T) {
