@@ -274,7 +274,7 @@ func (s *JSONSchema) latest() *JSONSchema {
 }
 
 // Not support nested elements tag eg:"a>b>c"
-// Not support tags: ",chardata", ",cdata", ",comment"
+// Not support tags: ",chardata", ",cdata", ",comment" AND ",attr"
 // Not support embedded structure with tag ",innerxml"
 // Only support nested elements tag in array type eg:"Name []string `xml:"names>name"`"
 func (s *JSONSchema) handleXMLTags(f reflect.StructField) {
@@ -284,20 +284,14 @@ func (s *JSONSchema) handleXMLTags(f reflect.StructField) {
 	}
 
 	if b, t := getTag(f, "xml", 0); b {
-		if t == "-" || s.Ref != "" {
+		if t == "" || t == "-" || s.Ref != "" {
 			return
-		} else if t == "" {
-			t = f.Name
 		}
 
 		if s.XML == nil {
 			s.XML = &XMLSchema{}
 		}
-		if a == "attr" {
-			s.XML.Attribute = t
-		} else {
-			s.XML.Name = t
-		}
+		s.XML.Name = t
 	}
 }
 
